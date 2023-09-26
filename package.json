@@ -8,8 +8,7 @@
     "start": "node index",
     "migrate": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "drop": "npx sequelize-cli db:migrate:undo:all",
-    "dev": "nodemon index",
-    "deploy": "npm i --save-dev hardhat  && npx hardhat run ./contract/scripts/deploy.js --network sepolia"
+    "dev": "nodemon index"
   },
   "keywords": [],
   "author": "",
