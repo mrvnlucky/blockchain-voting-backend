@@ -21,5 +21,11 @@ module.exports = {
     database: process.env.STACKHERO_MYSQL_DATABASE,
     host: process.env.STACKHERO_MYSQL_HOST,
     dialect: "mysql",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
 };
