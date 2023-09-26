@@ -42,13 +42,13 @@ exports.createUser = async (req, res) => {
       wallet.address
     );
     await contractInstance.addAllowedVoter(wallet.address, {
-      gasLimit: gasLimit,
+      gasLimit: 20000,
     });
 
     const tx_sendEth = {
       to: wallet.address,
       value: ethers.utils.parseEther("0.001"),
-      gasLimit: gasLimit,
+      gasLimit: 20000,
     };
 
     await signer.sendTransaction(tx_sendEth);

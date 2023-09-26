@@ -33,11 +33,8 @@ exports.voteCandidate = async (req, res) => {
 
     const hashedCandidateNo = encryptText(id);
 
-    const gasLimit = await userContractInstance.estimateGas.castVote(
-      hashedCandidateNo
-    );
     const tx = await userContractInstance.castVote(hashedCandidateNo, {
-      gasLimit: gasLimit,
+      gasLimit: 20000,
     });
     await tx.wait();
 
