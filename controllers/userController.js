@@ -37,11 +37,18 @@ exports.createUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const wallet = ethers.Wallet.createRandom();
-    await contractInstance.addAllowedVoter(wallet.address);
+
+    const gasLimit = await contractInstance.estimateGas.addAllowedVoter(
+      wallet.address
+    );
+    await contractInstance.addAllowedVoter(wallet.address, {
+      gasLimit: gasLimit,
+    });
 
     const tx_sendEth = {
       to: wallet.address,
       value: ethers.utils.parseEther("0.001"),
+      gasLimit: gasLimit,
     };
 
     await signer.sendTransaction(tx_sendEth);
