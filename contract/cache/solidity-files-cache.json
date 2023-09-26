@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "C:\\Users\\marvn\\Documents\\code\\blockchain-voting\\contract\\contracts\\Voting.sol": {
+    "C:\\Users\\marvn\\Documents\\code\\blockchain-voting-backend\\contract\\contracts\\Voting.sol": {
       "lastModificationDate": 1692116063797,
       "contentHash": "cdd78ad39cf7ebc85f0ac65c507679ec",
       "sourceName": "contracts/Voting.sol",

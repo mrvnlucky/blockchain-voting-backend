@@ -9,7 +9,10 @@ const express = require("express");
 
 const app = express();
 const corsOptions = {
-  origin: "http://localhost:3000", // Replace with your React frontend's domain
+  origin: [
+    "http://localhost:3000",
+    "https://blockchain-voting-eight.vercel.app/",
+  ], // Replace with your React frontend's domain
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   allowedHeaders: [
     "Access-Control-Allow-Origin",
