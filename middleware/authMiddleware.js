@@ -1,5 +1,8 @@
 // Import the necessary packages
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
+const secret = process.env.JWT_SECRET;
 
 // Define the authentication middleware
 exports.authMiddleware = (req, res, next) => {
@@ -7,7 +10,7 @@ exports.authMiddleware = (req, res, next) => {
     // Get the token from the request headers
     const token = req.headers.authorization.split(" ")[1];
     // Verify the token
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const decodedToken = jwt.verify(token, secret);
 
     // Attach the user payload to the request object
     req.user = decodedToken;
@@ -33,7 +36,7 @@ exports.adminAuthMiddleware = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
 
     // Verify the token
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const decodedToken = jwt.verify(token, secret);
 
     // Attach the user payload to the request object
     req.user = decodedToken;

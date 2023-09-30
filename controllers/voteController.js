@@ -33,9 +33,7 @@ exports.voteCandidate = async (req, res) => {
 
     const hashedCandidateNo = encryptText(id);
 
-    const tx = await userContractInstance.castVote(hashedCandidateNo, {
-      gasLimit: 30000,
-    });
+    const tx = await userContractInstance.castVote(hashedCandidateNo);
     await tx.wait();
 
     res.status(200).send({
