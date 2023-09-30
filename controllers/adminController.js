@@ -53,7 +53,7 @@ exports.createAdmin = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });
@@ -90,14 +90,14 @@ exports.getOneAdmin = async (req, res) => {
         message: "Admin tidak ditemukan",
       });
     }
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Berhasil mengambil data admin",
       data: admin,
     });
   } catch (error) {
     console.error(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });
@@ -129,14 +129,14 @@ exports.updateAdmin = async (req, res) => {
       { where: { id: admin.id } }
     );
 
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Data admin berhasil diubah",
       data: updatedAdmin,
     });
   } catch (error) {
     console.error(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });
@@ -155,13 +155,13 @@ exports.deleteAdmin = async (req, res) => {
     }
     await admin.destroy();
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Data admin berhasil dihapus",
     });
   } catch (error) {
     console.error(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });

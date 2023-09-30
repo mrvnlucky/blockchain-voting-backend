@@ -56,14 +56,14 @@ exports.createUser = async (req, res) => {
       walletAddress: hashedWalletAddress,
       privateKey: hashedPrivateKey,
     });
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Data user berhasil ditambahkan",
       data: user,
     });
   } catch (error) {
     console.error(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });
@@ -105,14 +105,14 @@ exports.getAllUsers = async (req, res) => {
       };
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Berhasil mengambil data user",
       data: combinedData,
     });
   } catch (error) {
     console.error(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });
@@ -132,7 +132,7 @@ exports.getOneUser = async (req, res) => {
       });
     }
     const user = await User.findOne({ where: { id: id } });
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Berhasil mengambil data admin",
       data: user,
@@ -140,7 +140,7 @@ exports.getOneUser = async (req, res) => {
   } catch (error) {
     console.error(error);
 
-    res.status(500).send({
+    return res.status(500).send({
       success: false,
       message: error.message,
     });
@@ -174,7 +174,7 @@ exports.updateUser = async (req, res) => {
       { where: { id: user.id } }
     );
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Data user berhasil diubah",
       data: updatedUser,
@@ -182,7 +182,7 @@ exports.updateUser = async (req, res) => {
   } catch (error) {
     console.error(error);
 
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });
@@ -209,14 +209,14 @@ exports.deleteUser = async (req, res) => {
     await contractInstance.deleteVoter(userWalletAddress);
     await user.destroy();
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Data user berhasil dihapus",
     });
   } catch (error) {
     console.error(error);
 
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });

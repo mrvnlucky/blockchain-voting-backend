@@ -45,7 +45,7 @@ exports.loginUser = async (req, res) => {
       data: { token, user },
     });
   } catch (error) {
-    res.status(500).send({
+    return res.status(500).send({
       message: error.message,
     });
   }

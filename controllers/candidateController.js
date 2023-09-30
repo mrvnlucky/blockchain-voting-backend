@@ -34,14 +34,14 @@ exports.createCandidate = async (req, res) => {
       img: img.secure_url,
     });
 
-    res.status(201).send({
+    return res.status(201).send({
       success: true,
       message: "Data kandidat berhasil ditambahkan",
       data: candidate,
     });
   } catch (error) {
     console.error(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });
@@ -66,14 +66,14 @@ exports.getAllCandidates = async (req, res) => {
       img: candidate.img,
     }));
 
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Berhasil mengambil data kandidat",
       data: candidates,
     });
   } catch (error) {
     console.error(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });
@@ -95,14 +95,14 @@ exports.getOneCandidate = async (req, res) => {
       });
     }
 
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Berhasil mengambil data kandidat",
       data: candidate,
     });
   } catch (error) {
     console.error(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });
@@ -150,13 +150,13 @@ exports.updateCandidate = async (req, res) => {
       );
     }
 
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Data kandidat berhasil diubah",
     });
   } catch (error) {
     console.error(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });
@@ -177,13 +177,13 @@ exports.deleteCandidate = async (req, res) => {
       });
     }
     await candidate.destroy({ where: { id: id } });
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Data kandidat berhasil dihapus",
     });
   } catch (error) {
     console.error(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: error.message,
     });

@@ -36,7 +36,7 @@ exports.voteCandidate = async (req, res) => {
     const tx = await userContractInstance.castVote(hashedCandidateNo);
     await tx.wait();
 
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Pemilihan berhasil",
     });
@@ -99,7 +99,7 @@ exports.getVoteResult = async (req, res) => {
       return b.voteCount - a.voteCount;
     });
 
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Berhasil mengambil data hasil akhir",
       data: sortedCandidates,
@@ -121,7 +121,7 @@ exports.startVoting = async (req, res) => {
   try {
     const tx = await contractInstance.startVoting();
     await tx.wait();
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Berhasil memulai pemilihan",
     });
@@ -149,7 +149,7 @@ exports.stopVoting = async (req, res) => {
   try {
     const tx = await contractInstance.stopVoting();
     await tx.wait();
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Berhasil menghentikan pemilihan",
     });
@@ -172,7 +172,7 @@ exports.stopVoting = async (req, res) => {
 exports.getVotingStatus = async (req, res) => {
   try {
     const tx = await contractInstance.getVotingStatus();
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Berhasil mengambil statu pemilihan",
       data: tx,
@@ -205,7 +205,7 @@ exports.getMyVote = async (req, res) => {
       });
     }
 
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Berhasil mengambil data pemilihan anda",
       data: candidate,
