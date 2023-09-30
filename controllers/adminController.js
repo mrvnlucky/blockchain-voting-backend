@@ -46,7 +46,7 @@ exports.createAdmin = async (req, res) => {
       password: hashedPassword,
     });
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Data admin berhasil terdaftar",
       data: admin,
@@ -66,14 +66,14 @@ exports.createAdmin = async (req, res) => {
 exports.getAllAdmins = async (req, res) => {
   try {
     const admins = await Admin.findAll();
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Berhasil mengambil data admin",
       data: admins,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send({
+    return res.status(500).send({
       success: false,
       message: error.message,
     });
