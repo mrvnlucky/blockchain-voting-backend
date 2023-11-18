@@ -83,10 +83,6 @@ contract Voting {
         emit VoterAdded(_voterAddress);
     }
 
-    function getAllVoterAddresses() public view returns (address[] memory) {
-        return voterAddresses;
-    }
-
     function castVote(
         string memory _hashedCandidateNo
     ) public onlyVotingRunning onlyVoter onlyAllowedAddress {
