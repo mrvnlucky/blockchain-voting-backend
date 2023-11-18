@@ -3,7 +3,6 @@ const User = db.User;
 const Admin = db.Admin;
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../utils/generateToken");
-const { decryptText, encryptText } = require("../utils/encryption");
 
 // @desc    Login user
 // @route   POST /api/v1/users/login
@@ -22,13 +21,14 @@ exports.loginUser = async (req, res) => {
 
     const user = await User.findOne({ where: { nik: nik } });
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!user || !passwordMatch) {
+    if (!user) {
       return res.status(401).send({
         success: false,
-        message: "Silahkan lengkapi NIK dan password Anda",
+        message: "User tidak ditemukan",
       });
     }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
       return res.status(401).json({
@@ -82,8 +82,9 @@ exports.loginAdmin = async (req, res) => {
       });
     }
 
-    // Check for admin username
     const admin = await Admin.findOne({ where: { username: username } });
+
+    // Check for admin username
     if (!admin) {
       return res.status(400).send({
         success: false,
@@ -91,14 +92,22 @@ exports.loginAdmin = async (req, res) => {
       });
     }
 
-    const token = generateToken({ id: admin.id, role: "admin" });
-    if (admin && (await bcrypt.compare(password, admin.password))) {
-      return res.send({
-        success: true,
-        message: "Login admin berhasil",
-        data: { token, admin },
+    const passwordMatch = await bcrypt.compare(password, admin.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Password tidak sesuai",
       });
     }
+
+    const token = generateToken({ id: admin.id, role: "admin" });
+
+    return res.send({
+      success: true,
+      message: "Login admin berhasil",
+      data: { token, admin },
+    });
   } catch (error) {
     return res.status(400).send({
       success: false,
@@ -112,6 +121,7 @@ exports.checkAdminAuth = async (req, res) => {
     const adminId = req.user.data.id;
 
     const admin = await Admin.findOne({ where: { id: adminId } });
+
     return res.status(200).json({
       success: true,
       message: "Admin authorized",

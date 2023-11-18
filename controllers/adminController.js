@@ -3,7 +3,6 @@ const db = require("../models");
 const Admin = db.Admin;
 
 const bcrypt = require("bcrypt");
-const { encryptText } = require("../utils/encryption");
 require("dotenv").config();
 
 // @desc    Add new admin account

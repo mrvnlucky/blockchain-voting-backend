@@ -209,7 +209,7 @@ exports.deleteUser = async (req, res) => {
     await contractInstance.deleteVoter(userWalletAddress);
     await user.destroy();
 
-    return res.status(200).json({
+    return res.status(200).send({
       success: true,
       message: "Data user berhasil dihapus",
     });

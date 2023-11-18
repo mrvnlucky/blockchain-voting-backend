@@ -174,7 +174,7 @@ exports.getVotingStatus = async (req, res) => {
     const tx = await contractInstance.getVotingStatus();
     return res.status(200).send({
       success: true,
-      message: "Berhasil mengambil statu pemilihan",
+      message: "Berhasil mengambil status pemilihan",
       data: tx,
     });
   } catch (error) {
