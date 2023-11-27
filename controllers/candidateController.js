@@ -124,8 +124,8 @@ exports.updateCandidate = async (req, res) => {
       });
     }
 
-    if (req.file) {
-      const img = await cloudinary.uploader.upload(req.file.buffer, {
+    if (req.file || req.file.path) {
+      const img = await cloudinary.uploader.upload(req.file.path, {
         folder: "Blockvote/candidates",
       });
       await Candidate.update(
