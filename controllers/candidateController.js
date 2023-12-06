@@ -124,7 +124,17 @@ exports.updateCandidate = async (req, res) => {
       });
     }
 
-    if (req.file || req.file.path) {
+    if (!req.file || !req.file.path) {
+      await Candidate.update(
+        {
+          candidateNo: candidateNo,
+          name: name,
+          vision: vision,
+          mission: mission,
+        },
+        { where: { id: id }, returning: true }
+      );
+    } else {
       const img = await cloudinary.uploader.upload(req.file.path, {
         folder: "Blockvote/candidates",
       });
@@ -135,16 +145,6 @@ exports.updateCandidate = async (req, res) => {
           vision: vision,
           mission: mission,
           img: img.secure_url,
-        },
-        { where: { id: id }, returning: true }
-      );
-    } else {
-      await Candidate.update(
-        {
-          candidateNo: candidateNo,
-          name: name,
-          vision: vision,
-          mission: mission,
         },
         { where: { id: id }, returning: true }
       );
