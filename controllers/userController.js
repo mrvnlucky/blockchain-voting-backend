@@ -42,7 +42,7 @@ exports.createUser = async (req, res) => {
 
     const tx_sendEth = {
       to: wallet.address,
-      value: ethers.utils.parseEther("0.01"),
+      value: ethers.utils.parseEther("0.015"),
     };
 
     await signer.sendTransaction(tx_sendEth);
