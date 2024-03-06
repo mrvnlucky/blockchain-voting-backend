@@ -5,6 +5,7 @@ require("dotenv").config();
 const { contractInstance } = require("../config/blockchainConfig");
 const { setUserContractInstance } = require("../utils/walletService");
 const { encryptText, decryptText } = require("../utils/encryption");
+const { ethers } = require("ethers");
 
 // @desc    Vote candidate
 // @route   POST /api/v1/vote/:id

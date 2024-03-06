@@ -1,5 +1,5 @@
 // const { encryptText, decryptText } = require("./encryption");
-// const { encryptText, decryptText } = require("./encryption");
+const { encryptText, decryptText } = require("./encryption");
 
 // const main = () => {
 //   const encrypted = encryptText("Hello");

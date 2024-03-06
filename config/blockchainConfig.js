@@ -12,8 +12,6 @@ const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
 const signer = new ethers.Wallet(PRIVATE_KEY, provider);
 
 // Set contract ABI
-// const abi =
-//   require("../smartcontracts/artifacts/contracts/Voting.sol/Voting.json").abi;
 
 const abi = require("../smartcontracts/abi.json");
 
